@@ -80,4 +80,12 @@ class ZipFileExtractTest < MiniTest::Test
     end
     assert(!File.exist?(outFile))
   end
+
+  def test_extract_zipzap
+    filename = 'test/data/zipzap.zip'
+    ::Zip::File.open(filename) {
+      |zf|
+      assert_operator zf.read('evaluation.json').size, :>, 0
+    }
+  end
 end
